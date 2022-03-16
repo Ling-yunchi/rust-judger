@@ -1,4 +1,8 @@
-#[derive(Debug)]
+use std::error::Error;
+use clap::Parser;
+
+#[derive(Parser,Debug)]
+#[clap(author, version, about,long_about=None]
 pub struct Config {
     pub id: String,
     pub language: String,
@@ -10,7 +14,7 @@ pub struct Config {
 }
 
 impl Config {
-    pub fn new(args: Vec<String>) -> Result<Config, &'static str> {
+    pub fn new(args: Vec<String>) -> Result<Config, Box<dyn Error>> {
         if args.len() < 6 {
             return Err("not enough arguments".into());
         }
@@ -19,9 +23,9 @@ impl Config {
             id: args[1].clone(),
             language: args[2].clone(),
             file_path: args[3].clone(),
-            time_limit: args[4].parse::<i32>().unwrap(),
-            memory_limit: args[5].parse::<i32>().unwrap(),
-            test_case_number: args[6].parse::<i32>().unwrap(),
+            time_limit: args[4].parse::<i32>()?,
+            memory_limit: args[5].parse::<i32>()?,
+            test_case_number: args[6].parse::<i32>()?,
             test_case_paths: Vec::new(),
         };
 
