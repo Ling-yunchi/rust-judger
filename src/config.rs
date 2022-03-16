@@ -1,8 +1,9 @@
-use std::error::Error;
 use clap::Parser;
+use std::error::Error;
 
-#[derive(Parser,Debug)]
-#[clap(author, version, about,long_about=None]
+// a code judger write by rust
+#[derive(Parser, Debug)]
+#[clap(author, version, about,long_about = None)]
 pub struct Config {
     pub id: String,
     pub language: String,
